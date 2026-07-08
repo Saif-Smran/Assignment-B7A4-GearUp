@@ -20,6 +20,35 @@ const createGear = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const updateGearById = catchAsync(async (req: Request, res: Response) => {
+    const gearId  = req.params.id;
+    const updateData: Partial<CreateGearPayload> = req.body;
+
+    const result = await providerService.updateGearById(gearId as string, updateData);
+
+    sendResponse(res, {
+        success: true,
+        status: httpStatus.OK,
+        message: "Gear updated successfully",
+        data: result
+    })
+})
+
+const deleteGearById = catchAsync(async (req: Request, res: Response) => {
+    const gearId  = req.params.id;
+
+    const result = await providerService.deleteGearById(gearId as string);
+
+    sendResponse(res, {
+        success: true,
+        status: httpStatus.OK,
+        message: "Gear deleted successfully",
+        data: result
+    })
+})
+
 export const providerController = {
-    createGear
+    createGear,
+    updateGearById,
+    deleteGearById
 }

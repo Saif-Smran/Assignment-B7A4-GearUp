@@ -28,3 +28,14 @@ enum PaymentStatus {
   COMPLETED
   FAILED
 }
+
+enum Category {
+  CYCLING
+  CAMPING
+  FITNESS
+  WATER_SPORTS
+  WINTER_SPORTS
+  TEAM_SPORTS
+  HIKING
+  CLIMBING
+}

@@ -187,7 +187,10 @@ const updateUser = async (userId: string, payload: Partial<Prisma.UserUpdateInpu
         where: {
             id: userId
         },
-        data: payload as Prisma.UserUpdateInput
+        data: payload as Prisma.UserUpdateInput,
+        omit: {
+            password: true
+        }
     })
 
     return user

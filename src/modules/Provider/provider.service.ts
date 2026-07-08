@@ -3,34 +3,39 @@ import { CreateGearPayload } from "./provider.interface";
 
 
 const createGearToInventory = async (userId: string ,gearPayload: CreateGearPayload) => {
-    const { name, description, pricePerDay, quantity, providerId, image, brand, category } = gearPayload;
+    const { name, description, pricePerDay, quantityTotal, images, brand, category } = gearPayload;
 
-    let catagoryDb = await prisma.category.findUnique({
-        where: {
-            name: category
-        }
-    })
-
-    if (!catagoryDb) {
-        const newCategory = await prisma.category.create({
-            data: {
-                name: category
-            }
-        })
-        catagoryDb = newCategory
-    }
 
     const gear = await prisma.gearItem.create({
         data: {
             name,
             description,
             pricePerDay,
-            quantityTotal: quantity,
-            quantityAvail: quantity,
+            quantityTotal: quantityTotal,
+            quantityAvail: quantityTotal,
             providerId : userId,
-            images: image,
+            images,
             brand,
-            categoryId: catagoryDb.id
+            category 
+        }
+    })
+    return gear
+}
+
+const updateGearById = async (gearId: string, updateData: Partial<CreateGearPayload>) => {
+    const gear = await prisma.gearItem.update({
+        where: {
+            id: gearId
+        },
+        data: updateData
+    })
+    return gear
+}
+
+const deleteGearById = async (gearId: string) => {
+    const gear = await prisma.gearItem.delete({
+        where: {
+            id: gearId
         }
     })
     return gear
@@ -38,5 +43,7 @@ const createGearToInventory = async (userId: string ,gearPayload: CreateGearPayl
 
 
 export const providerService = {
-    createGearToInventory
+    createGearToInventory,
+    updateGearById,
+    deleteGearById
 }

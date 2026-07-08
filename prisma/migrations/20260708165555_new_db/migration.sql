@@ -2,25 +2,16 @@
 CREATE TYPE "Role" AS ENUM ('CUSTOMER', 'PROVIDER', 'ADMIN');
 
 -- CreateEnum
-CREATE TYPE "UserStatus" AS ENUM ('ACTIVE', 'SUSPENDED');
+CREATE TYPE "UserStatus" AS ENUM ('ACTIVE', 'BLOCKED');
 
 -- CreateEnum
 CREATE TYPE "RentalStatus" AS ENUM ('PLACED', 'CONFIRMED', 'PAID', 'PICKED_UP', 'RETURNED', 'CANCELLED');
 
 -- CreateEnum
-CREATE TYPE "PaymentProvider" AS ENUM ('STRIPE', 'SSLCOMMERZ');
-
--- CreateEnum
 CREATE TYPE "PaymentStatus" AS ENUM ('PENDING', 'COMPLETED', 'FAILED');
 
--- CreateTable
-CREATE TABLE "Category" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "description" TEXT,
-
-    CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
-);
+-- CreateEnum
+CREATE TYPE "Category" AS ENUM ('CYCLING', 'CAMPING', 'FITNESS', 'WATER_SPORTS', 'WINTER_SPORTS', 'TEAM_SPORTS', 'HIKING', 'CLIMBING');
 
 -- CreateTable
 CREATE TABLE "GearItem" (
@@ -35,8 +26,8 @@ CREATE TABLE "GearItem" (
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "category" "Category" NOT NULL,
     "providerId" TEXT NOT NULL,
-    "categoryId" TEXT NOT NULL,
 
     CONSTRAINT "GearItem_pkey" PRIMARY KEY ("id")
 );
@@ -46,7 +37,7 @@ CREATE TABLE "Payment" (
     "id" TEXT NOT NULL,
     "transactionId" TEXT NOT NULL,
     "amount" DECIMAL(10,2) NOT NULL,
-    "provider" "PaymentProvider" NOT NULL,
+    "provider" TEXT NOT NULL DEFAULT 'STRIPE',
     "status" "PaymentStatus" NOT NULL DEFAULT 'PENDING',
     "paidAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -110,10 +101,7 @@ CREATE TABLE "User" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
-
--- CreateIndex
-CREATE INDEX "GearItem_categoryId_idx" ON "GearItem"("categoryId");
+CREATE INDEX "GearItem_category_idx" ON "GearItem"("category");
 
 -- CreateIndex
 CREATE INDEX "GearItem_providerId_idx" ON "GearItem"("providerId");
@@ -150,9 +138,6 @@ CREATE INDEX "User_role_idx" ON "User"("role");
 
 -- AddForeignKey
 ALTER TABLE "GearItem" ADD CONSTRAINT "GearItem_providerId_fkey" FOREIGN KEY ("providerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "GearItem" ADD CONSTRAINT "GearItem_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Payment" ADD CONSTRAINT "Payment_rentalOrderId_fkey" FOREIGN KEY ("rentalOrderId") REFERENCES "RentalOrder"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -10,15 +10,14 @@ model GearItem {
   isActive      Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  category      Category
 
   providerId String
-  provider   User     @relation("ProviderGear", fields: [providerId], references: [id])
-  categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
+  provider   User   @relation("ProviderGear", fields: [providerId], references: [id])
 
   rentalOrderItems RentalOrderItem[]
   reviews          Review[]
 
-  @@index([categoryId])
+  @@index([category])
   @@index([providerId])
 }
