@@ -37,11 +37,15 @@ export const globalErrorHandler = (err: any, req: Request, res: Response, next: 
         errorMessage = "Error occurred during query execution"
     }
 
+    else{
+        errorName = err?.name || "Internal Server Error",
+        statusCode = err?.cause || httpStatus.INTERNAL_SERVER_ERROR,
+        errorMessage = err?.message || "Internal Server Error"
+    }
 
 
 
-
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+    res.status( statusCode || httpStatus.INTERNAL_SERVER_ERROR).json({
         success: false,
         statusCode: statusCode || httpStatus.INTERNAL_SERVER_ERROR,
         name: errorName,

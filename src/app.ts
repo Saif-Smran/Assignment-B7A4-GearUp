@@ -3,7 +3,9 @@ import express from "express"
 import cors from "cors"
 import { config } from "./config"
 import cookiesParser from "cookie-parser"
-import { Role } from "../generated/prisma/client"
+import { authRouter } from "./modules/auth/auth.route"
+import { globalErrorHandler } from "./middleware/globalErrorHandler"
+import { notFound } from "./middleware/notfound"
 
 const app: Application = express()
 
@@ -20,17 +22,11 @@ app.get('/', (req: Request, res: Response) => {
     res.send('GearUp - Rent Sports & Outdoor Gear Instantly! API is running successfully.')
 })
 
-declare global {
-    namespace Express {
-        interface Request {
-            user?: {
-                id: string;
-                email: string;
-                name: string;
-                role: Role;
-            };
-        }
-    }
-}
+app.use('/api/auth', authRouter)
+
+
+
+app.use(globalErrorHandler)
+app.use(notFound) 
 
 export default app
