@@ -6,6 +6,7 @@ export interface CreateUserPayload {
     password: string;
     role: Role;
     phone?: string;
+    status?: string;
 }
 
 export interface LoginUserPayload {

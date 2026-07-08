@@ -6,6 +6,10 @@ import cookiesParser from "cookie-parser"
 import { authRouter } from "./modules/auth/auth.route"
 import { globalErrorHandler } from "./middleware/globalErrorHandler"
 import { notFound } from "./middleware/notfound"
+import { gearRouter } from "./modules/Gear/gear.route"
+import { providerRouter } from "./modules/Provider/provider.route"
+import auth from "./middleware/auth"
+import { Role } from "../generated/prisma/enums"
 
 const app: Application = express()
 
@@ -23,7 +27,8 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.use('/api/auth', authRouter)
-
+app.use('/api/gear', gearRouter)
+app.use('/api/provider', auth(Role.PROVIDER) , providerRouter)
 
 
 app.use(globalErrorHandler)

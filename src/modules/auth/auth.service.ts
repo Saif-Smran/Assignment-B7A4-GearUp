@@ -1,10 +1,12 @@
 import bcrypt from "bcryptjs";
 import { CreateUserPayload, LoginUserPayload } from "./auth.interface";
+
 import { config } from "../../config";
 import { prisma } from "../../lib/prisma";
 import httpStatus from "http-status";
 import { Jwt, SignOptions } from "jsonwebtoken";
 import { jwtUtils } from "../../utils/jwt";
+import { Prisma } from "../../../generated/prisma/client";
 
 const createUserIntoDB = async (Payload: CreateUserPayload) => {
 
@@ -161,10 +163,22 @@ const getCurrentUser = async (userId: string) => {
     return user
 }
 
-const updateUser = async (userId: string, payload: Partial<CreateUserPayload>) => {
+const updateUser = async (userId: string, payload: Partial<Prisma.UserUpdateInput>) => {
 
     if (payload?.password) {
         throw new Error("You are not allowed to update password using this route. Use update password route", {
+            cause: httpStatus.BAD_REQUEST
+        })
+    }
+
+    if (payload?.role) {
+        throw new Error("You are not allowed to update role using this route. Use update role route", {
+            cause: httpStatus.BAD_REQUEST
+        })
+    }
+
+    if (payload?.status) {
+        throw new Error("You are not allowed to update status using this route. Use update status route", {
             cause: httpStatus.BAD_REQUEST
         })
     }
@@ -173,7 +187,7 @@ const updateUser = async (userId: string, payload: Partial<CreateUserPayload>) =
         where: {
             id: userId
         },
-        data: payload
+        data: payload as Prisma.UserUpdateInput
     })
 
     return user
