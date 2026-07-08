@@ -18,10 +18,10 @@ enum RentalStatus {
   CANCELLED
 }
 
-enum PaymentProvider {
-  STRIPE
-  SSLCOMMERZ
-}
+// enum PaymentProvider {
+//   STRIPE
+//   SSLCOMMERZ
+// }
 
 enum PaymentStatus {
   PENDING
