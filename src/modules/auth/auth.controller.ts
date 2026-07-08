@@ -81,8 +81,37 @@ const refreshAccessToken = catchAsync(async (req: Request, res: Response, next: 
     }
 })
 
+const getCurrentUser = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user?.id;
+
+    const result = await authService.getCurrentUser(userId!);
+
+    sendResponse(res, {
+        success: true,
+        status: httpStatus.OK,
+        message: "User fetched successfully",
+        data: result
+    })
+})
+
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user?.id;
+    const payload: Partial<CreateUserPayload> = req.body;
+
+    const result = await authService.updateUser(userId!, payload);
+
+    sendResponse(res, {
+        success: true,
+        status: httpStatus.OK,
+        message: "User updated successfully",
+        data: result
+    })
+})
+
 export const authController = {
     createUser,
     loginUser,
-    refreshAccessToken
+    refreshAccessToken,
+    getCurrentUser,
+    updateUser
 }

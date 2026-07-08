@@ -148,8 +148,41 @@ const refreshToken = async (payload: { refreshToken: string }) => {
     })
 }
 
+const getCurrentUser = async (userId: string) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            id: userId
+        },
+        omit: {
+            password: true
+        }
+    })
+    
+    return user
+}
+
+const updateUser = async (userId: string, payload: Partial<CreateUserPayload>) => {
+
+    if (payload?.password) {
+        throw new Error("You are not allowed to update password using this route. Use update password route", {
+            cause: httpStatus.BAD_REQUEST
+        })
+    }
+
+    const user = await prisma.user.update({
+        where: {
+            id: userId
+        },
+        data: payload
+    })
+
+    return user
+}
+
 export const authService = {
     createUserIntoDB,
     loginUserFromDB,
-    refreshToken
+    refreshToken,
+    getCurrentUser,
+    updateUser
 }
