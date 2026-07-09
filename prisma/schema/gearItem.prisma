@@ -12,7 +12,7 @@ model GearItem {
   updatedAt     DateTime @updatedAt
   category      Category
 
-  providerId String
+  providerId String @unique
   provider   User   @relation("ProviderGear", fields: [providerId], references: [id])
 
   rentalOrderItems RentalOrderItem[]

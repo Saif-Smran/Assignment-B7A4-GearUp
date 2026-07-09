@@ -10,7 +10,10 @@ model RentalOrderItem {
   rentalOrder   RentalOrder @relation(fields: [rentalOrderId], references: [id], onDelete: Cascade)
   gearItemId    String
   gearItem      GearItem    @relation(fields: [gearItemId], references: [id])
+  // providerId    String
+  // provider      GearItem    @relation("ProviderRentalOrderItems", fields: [providerId], references: [providerId])
 
   @@index([rentalOrderId])
   @@index([gearItemId])
+  // @@index([providerId])
 }

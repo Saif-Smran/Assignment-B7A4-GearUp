@@ -4,6 +4,7 @@ import { CreateGearPayload } from "./provider.interface";
 import { providerService } from "./provider.service";
 import sendResponse from "../../utils/sendResponce";
 import httpStatus from "http-status";
+import { RentalStatus } from "../../../generated/prisma/client";
 
 
 const createGear = catchAsync(async (req: Request, res: Response) => {
@@ -47,8 +48,38 @@ const deleteGearById = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const getAllOrdersByProviderId = catchAsync(async (req: Request, res: Response) => {
+    const providerId = req.user?.id;
+
+    const result = await providerService.getAllOrdersByProviderId(providerId!);
+
+    sendResponse(res, {
+        success: true,
+        status: httpStatus.OK,
+        message: "Orders fetched successfully",
+        data: result
+    })
+})
+
+const updateorderStatus = catchAsync(async (req: Request, res: Response) => {
+    const orderId = req.params.id;
+    const { status } = req.body;
+
+    const result = await providerService.updateorderStatus(orderId as string, status as RentalStatus);
+
+    sendResponse(res, {
+        success: true,
+        status: httpStatus.OK,
+        message: "Order status updated successfully",
+        data: result
+    })
+})
+
 export const providerController = {
     createGear,
     updateGearById,
-    deleteGearById
+    deleteGearById,
+    updateorderStatus,
+    getAllOrdersByProviderId
 }
+   
