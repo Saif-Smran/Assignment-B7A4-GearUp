@@ -13,6 +13,7 @@ import { Role } from "../generated/prisma/enums"
 import { orderRouter } from "./modules/orders/orders.route"
 import { reviewRouter } from "./modules/reviews/reviews.route"
 import { adminRouter } from "./modules/admin/admin.route"
+import { paymentRouter } from "./modules/payments/payments.route"
 
 const app: Application = express()
 
@@ -21,6 +22,7 @@ app.use(cors({
     credentials: true
 }))
 
+app.use('/api/payments/confirm', express.raw({ type: 'application/json' }))
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookiesParser()) // for parsing cookies
@@ -35,6 +37,7 @@ app.use('/api/provider', auth(Role.PROVIDER) , providerRouter)
 app.use('/api/rentals', auth(Role.CUSTOMER), orderRouter)
 app.use('/api/reviews', auth(Role.CUSTOMER), reviewRouter)
 app.use('/api/admin', auth(Role.ADMIN), adminRouter)
+app.use('/api/payments', paymentRouter)
 
 
 app.use(globalErrorHandler)
