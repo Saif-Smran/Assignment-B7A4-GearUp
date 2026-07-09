@@ -111,7 +111,7 @@ const confirmPayment = async (payload: ConfirmPaymentPayload) => {
 		throw new Error("Payment transaction id is required", {
 			cause: httpStatus.BAD_REQUEST,
 		});
-	}
+	} 
 
 	const existingPayment = await prisma.payment.findUnique({
 		where: { transactionId },
@@ -119,14 +119,14 @@ const confirmPayment = async (payload: ConfirmPaymentPayload) => {
 			rentalOrder: true,
 		},
 	});
-
+ 
 	if (!existingPayment) {
 		console.log("Stripe webhook received without matching payment", {
 			eventType,
 			transactionId,
 			rentalOrderId,
 		});
-
+ 
 		return {
 			acknowledged: true,
 			eventType,
