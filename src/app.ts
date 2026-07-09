@@ -22,7 +22,7 @@ app.use(cors({
     credentials: true
 }))
 
-app.use('/api/payments/confirm', express.raw({ type: 'application/json' }))
+
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookiesParser()) // for parsing cookies
