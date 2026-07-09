@@ -1,0 +1,691 @@
+{
+  "info": {
+    "_postman_id": "56de31a8-7b9d-467d-95df-d4e947b4936f",
+    "name": "GearUp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "36556687",
+    "_collection_link": "https://go.postman.co/collection/36556687-56de31a8-7b9d-467d-95df-d4e947b4936f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Dhaka Adventure Gear\",\r\n  \"email\": \"provider@dhakaadventuregear.com\",\r\n  \"password\": \"SecurePass123!\",\r\n  \"role\": \"PROVIDER\",\r\n  \"phone\": \"01898765432\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"rahim.uddin@example.com\",\r\n  \"password\": \"SecurePass123!\"\r\n \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Current user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/auth/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Rahim Uddin\",\r\n    \"email\": \"rahim.uddin@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/auth/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Provider Management",
+      "item": [
+        {
+          "name": "Create gear",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Coleman Sundome 4-Person Tent\",\r\n    \"description\": \"Weatherproof dome tent with WeatherTec system, easy 10-minute setup, fits 4 people comfortably. Includes rainfly and stakes.\",\r\n    \"brand\": \"Coleman\",\r\n    \"category\": \"CAMPING\",\r\n    \"pricePerDay\": 350.00,\r\n    \"quantityTotal\": 8,\r\n    \"images\": [\r\n        \"https://your-storage-bucket.com/gear/coleman-sundome-1.jpg\",\r\n        \"https://your-storage-bucket.com/gear/coleman-sundome-2.jpg\",\r\n        \"https://your-storage-bucket.com/gear/coleman-sundome-3.jpg\"\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/provider/gear",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "provider",
+                "gear"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Gear",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Coleman Sundome 4-Person Tent\",\r\n  \"description\": \"Weatherproof dome tent with WeatherTec system, easy 10-minute setup, fits 4 people comfortably. Includes rainfly and stakes.\",\r\n  \"brand\": \"Coleman\",\r\n  \"category\": \"CAMPING\",\r\n  \"pricePerDay\": 350.00,\r\n  \"quantityTotal\": 8,\r\n  \"images\": [\r\n    \"https://your-storage-bucket.com/gear/coleman-sundome-1.jpg\",\r\n    \"https://your-storage-bucket.com/gear/coleman-sundome-3.jpg\"\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/provider/gear/ea1ce440-0f59-4e7a-9db9-b1c8e27c42ca",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "provider",
+                "gear",
+                "ea1ce440-0f59-4e7a-9db9-b1c8e27c42ca"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Gear",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/provider/gear/ea1ce440-0f59-4e7a-9db9-b1c8e27c42ca",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "provider",
+                "gear",
+                "ea1ce440-0f59-4e7a-9db9-b1c8e27c42ca"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get order request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/provider/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "provider",
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update order status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"CONFIRMED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/provider/orders/e12e767d-ead9-4b12-80db-b7b62e62aa43",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "provider",
+                "orders",
+                "e12e767d-ead9-4b12-80db-b7b62e62aa43"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Gear",
+      "item": [
+        {
+          "name": "Get all gear",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/gear/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "gear",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Coleman",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "CYCLING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "minPrice",
+                  "value": "300",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "400",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Gear by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/gear/fd2960e6-b5ab-4c72-a413-20d66656ec14",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "gear",
+                "fd2960e6-b5ab-4c72-a413-20d66656ec14"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all catagories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/gear/categories",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "gear",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rental Orders",
+      "item": [
+        {
+          "name": "Create rental order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"items\": [\r\n    {\r\n      \"gearItemId\": \"fd2960e6-b5ab-4c72-a413-20d66656ec14\",\r\n      \"quantity\": 1,\r\n      \"startDate\": \"2026-07-15\",\r\n      \"endDate\": \"2026-07-18\"\r\n    },\r\n    {\r\n      \"gearItemId\": \"97829628-c5c9-4781-b055-268c615bca4f\",\r\n      \"quantity\": 2,\r\n      \"startDate\": \"2026-07-15\",\r\n      \"endDate\": \"2026-07-17\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/rentals",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "rentals"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all user rental orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/rentals",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "rentals"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rental Order By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/rentals/e12e767d-ead9-4b12-80db-b7b62e62aa43",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "rentals",
+                "e12e767d-ead9-4b12-80db-b7b62e62aa43"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Create Review",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"gearItemId\": \"97829628-c5c9-4781-b055-268c615bca4f\",\r\n    \"rentalOrderId\": \"e12e767d-ead9-4b12-80db-b7b62e62aa43\",\r\n    \"rating\": 4,\r\n    \"comment\": \"Bike was in great condition, gears shifted smoothly the whole trip. Would rent again.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/reviews",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get All User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/admin/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "admin",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Coleman",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "CYCLING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "minPrice",
+                  "value": "300",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "400",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all gear items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/admin/gear",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "admin",
+                "gear"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Rentals",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/payments/confirm",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "payments",
+                "confirm"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"ACTIVE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/admin/users/aa5842f3-3dca-4ce3-b160-69e6e0fba8fa",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "admin",
+                "users",
+                "aa5842f3-3dca-4ce3-b160-69e6e0fba8fa"
+              ],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Coleman",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "CYCLING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "minPrice",
+                  "value": "300",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "400",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Payment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"rentalOrderId\": \"e12e767d-ead9-4b12-80db-b7b62e62aa43\",\r\n  \"provider\": \"STRIPE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/payments/create",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "payments",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Paments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/payments/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "payments",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payments By Id",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
