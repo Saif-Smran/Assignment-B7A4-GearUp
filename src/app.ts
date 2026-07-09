@@ -11,6 +11,7 @@ import { providerRouter } from "./modules/Provider/provider.route"
 import auth from "./middleware/auth"
 import { Role } from "../generated/prisma/enums"
 import { orderRouter } from "./modules/orders/orders.route"
+import { reviewRouter } from "./modules/reviews/reviews.route"
 
 const app: Application = express()
 
@@ -31,6 +32,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/gear', gearRouter)
 app.use('/api/provider', auth(Role.PROVIDER) , providerRouter)
 app.use('/api/rentals', auth(Role.CUSTOMER), orderRouter)
+app.use('/api/reviews', auth(Role.CUSTOMER), reviewRouter)
 
 
 app.use(globalErrorHandler)

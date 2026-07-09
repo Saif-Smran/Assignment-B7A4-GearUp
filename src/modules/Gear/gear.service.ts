@@ -39,6 +39,14 @@ const getAllGear = async (Payload: searchGearQuery) => {
     const gear = await prisma.gearItem.findMany({
         where: { AND: andConditions },
         orderBy: { createdAt: "desc" },
+        include: {
+            reviews: {
+                select: {
+                    rating: true,
+                    comment: true,
+                },
+            },
+        },
     });
 
     return gear;
@@ -48,6 +56,14 @@ const getAllGear = async (Payload: searchGearQuery) => {
 const getGearById = async (gearId: string) => {
     const gear = await prisma.gearItem.findUnique({
         where: { id: gearId },
+        include: {
+            reviews: {
+                select: {
+                    rating: true,
+                    comment: true,
+                },
+            },
+        },
     });
     return gear;
 };
