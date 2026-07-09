@@ -4,6 +4,7 @@ import { authService } from "./auth.service";
 import { CreateUserPayload } from "./auth.interface";
 import httpStatus from "http-status";
 import sendResponse from "../../utils/sendResponce";
+import { Prisma } from "../../../generated/prisma/client";
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
 
@@ -96,9 +97,9 @@ const getCurrentUser = catchAsync(async (req: Request, res: Response) => {
 
 const updateUser = catchAsync(async (req: Request, res: Response) => {
     const userId = req.user?.id;
-    const payload: Partial<CreateUserPayload> = req.body;
+    const payload: Partial<Prisma.UserUpdateInput> = req.body;
 
-    const result = await authService.updateUser(userId!, payload);
+    const result = await authService.updateUser(userId!, payload );
 
     sendResponse(res, {
         success: true,
