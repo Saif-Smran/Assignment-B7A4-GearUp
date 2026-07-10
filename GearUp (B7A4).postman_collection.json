@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "56de31a8-7b9d-467d-95df-d4e947b4936f",
-    "name": "GearUp",
+    "name": "GearUp (B7A4)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "36556687",
     "_collection_link": "https://go.postman.co/collection/36556687-56de31a8-7b9d-467d-95df-d4e947b4936f?source=collection_link"
@@ -549,7 +549,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8000/api/payments/confirm",
+              "raw": "http://localhost:8000/api/admin/rentals",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -557,8 +557,8 @@
               "port": "8000",
               "path": [
                 "api",
-                "payments",
-                "confirm"
+                "admin",
+                "rentals"
               ]
             }
           },
@@ -681,7 +681,20 @@
           "name": "Get Payments By Id",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/payments/39d09f82-4ee9-490c-96f1-d55abf4631b8",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "payments",
+                "39d09f82-4ee9-490c-96f1-d55abf4631b8"
+              ]
+            }
           },
           "response": []
         }
